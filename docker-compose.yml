@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  YUYUChanGPT:
+    image: mona233/chuanhuchatgpt:latest
+    container_name: YUYUChanGPT
+    volumes:
+      - ./history:/app/history
+      - ./config.json:/app/config.json
+    ports:
+      - "7860:7860"
+
+  watchtowerforYUYUChanGPT:
+    image: containrrr/watchtower
+    container_name: watchtowerforYUYUChanGPT
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 60 YUYUChanGPT
+
